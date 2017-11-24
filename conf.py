@@ -9,6 +9,7 @@ CAName = os.environ.get("MQTTREST_CA_NAME", "IOTmidCA")
 
 keyLength = int(os.environ.get("MQTTREST_KEY_LENGHT", 2048))
 
+kafkaHost = os.environ.get("MQTTREST_KAFKA_HOST", "kafka:9092")
 
 ACLfilePath = "/usr/local/src/mosquitto-1.4.13/certs/access.acl"
 certsDir = "/usr/local/src/mosquitto-1.4.13/certs/"
