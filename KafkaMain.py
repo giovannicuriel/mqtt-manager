@@ -18,14 +18,12 @@ LOGGER.setLevel(logging.DEBUG)
 
 def KafkaConsumerLoop():
     while True:
-        LOGGER.debug("waiting for new messages")
-
         # To consume latest messages and auto-commit offsets
         while True:
             try:
                 consumer = (kafka.
                             KafkaConsumer('notifyDeviceChange',
-                                          group_id='my-group',
+                                          group_id='mqtt-manager',
                                           bootstrap_servers=[conf.kafkaHost]))
                 break
             except kafka.errors.NoBrokersAvailable:
@@ -34,6 +32,7 @@ def KafkaConsumerLoop():
                              ' Will retry in 30sec' % conf.kafkaHost)
                 sleep(30)
 
+        LOGGER.debug("waiting for new messages")
         for message in consumer:
             try:
                 requestData = json.loads(message.value)
