@@ -22,7 +22,7 @@ def KafkaConsumerLoop():
         while True:
             try:
                 consumer = (kafka.
-                            KafkaConsumer('notifyDeviceChange',
+                            KafkaConsumer('dojot.device-manager.device',
                                           group_id='mqtt-manager',
                                           bootstrap_servers=[conf.kafkaHost]))
                 break
@@ -41,30 +41,30 @@ def KafkaConsumerLoop():
                              + dumpKafkaMessage(message))
                 continue
 
-            if 'action' not in requestData.keys():
-                LOGGER.error('Action not specified. '
-                             + dumpKafkaMessage(message))
+            # check if message have all the needed params
+            deviceInfo = checkMessageParams(message, requestData)
+            if not deviceInfo:
                 continue
 
-            if requestData['action'] in ['create', 'update']:
+            if deviceInfo['action'] in ['create', 'update']:
                 try:
-                    dc.addDeviceACLRequest(requestData)
-                    LOGGER.info('device %s created' % requestData['device'])
+                    dc.addDeviceACLRequest(deviceInfo)
+                    LOGGER.info('device %s created' % deviceInfo['device'])
                 except dc.RequestError as err:
                     LOGGER.error(err.message + " "
                                  + dumpKafkaMessage(message))
 
-            elif requestData['action'] == 'delete':
+            elif deviceInfo['action'] == 'delete':
                 try:
-                    dc.removeDeviceACLRequest(requestData)
+                    dc.removeDeviceACLRequest(deviceInfo)
                     LOGGER.info("Device %s removed from ACL"
-                                % requestData['device'])
+                                % deviceInfo['device'])
                 except dc.RequestError as err:
                     LOGGER.error(err.message + " "
                                  + dumpKafkaMessage(message))
 
             else:
-                LOGGER.error("'Action' " + requestData['action']
+                LOGGER.error("'event' " + requestData['event']
                              + " not implemented"
                              + dumpKafkaMessage(message))
 
@@ -76,6 +76,41 @@ def dumpKafkaMessage(msg):
                msg.offset, msg.key,
                msg.value)
             )
+
+
+def checkMessageParams(message, requestData):
+    deviceInfo = {}
+    # some sanity checks on kafka message fields
+    # get device name and topic
+    if 'event' not in requestData.keys():
+        LOGGER.error('event not specified. '
+                     + dumpKafkaMessage(message))
+        return None
+    deviceInfo['action'] = requestData['event']
+
+    if 'data' not in requestData.keys():
+        LOGGER.error("data segment not found. "
+                     + dumpKafkaMessage(message))
+        return None
+    if 'id' not in requestData['data'].keys():
+        LOGGER.error("device id not specified. "
+                     + dumpKafkaMessage(message))
+        return None
+    deviceInfo['device'] = requestData['data']['id']
+
+    if 'meta' not in requestData.keys():
+        LOGGER.error("meta segment not found. "
+                     + dumpKafkaMessage(message))
+        return None
+    if 'service' not in requestData['meta'].keys():
+        LOGGER.error("service not specified. "
+                     + dumpKafkaMessage(message))
+        return None
+    deviceInfo['topic'] = ('/' + requestData['meta']['service']
+                           + '/' + requestData['data']['id']
+                           + '/attrs')
+
+    return deviceInfo
 
 
 KafkaConsumerLoop()
