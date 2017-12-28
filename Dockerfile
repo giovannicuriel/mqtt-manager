@@ -4,7 +4,7 @@ MAINTAINER Alexandre Vasconcellos, alexv@cpqd.com.br
 USER root
 RUN apt-get update \
 	&& apt-get install -y python-openssl python-pip uwsgi-plugin-python nginx supervisor \
-	&& pip install uwsgi flask requests 
+	&& pip install uwsgi flask requests kafka
 
 RUN  mkdir -p /var/www/app
 COPY *.py  /var/www/app/
@@ -27,7 +27,7 @@ RUN mkdir -p /var/log/nginx/app /var/log/uwsgi/app /var/log/supervisor  /var/www
 	chown -R mosquitto /usr/local/src/mosquitto-1.4.13/ && \
 	chmod +x /usr/local/src/mosquitto-1.4.13/entrypoint.sh  && \
 	chmod +x /usr/local/src/mosquitto-1.4.13/initialConf.py && \
-	ln /var/www/app/conf.py /usr/local/src/mosquitto-1.4.13/conf.py 
+	ln /var/www/app/conf.py /usr/local/src/mosquitto-1.4.13/conf.py
 
 EXPOSE 8883
 CMD ["/usr/local/src/mosquitto-1.4.13/entrypoint.sh"]
