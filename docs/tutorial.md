@@ -30,6 +30,8 @@ On docker-compose.yml:
 
 - Change the image of the service 'mqtt' from 'ansi/mosquitto' to
   'dojot/mqtt-manager';
+- Add a new entry in exported port list for REST API access:
+  - "9010:9010"
 - Change the public port for 'mqtt' service from '1883:1883' to
   '8883:8883';
 - Change the value of the environment variable MQTT\_TLS of the

@@ -6,6 +6,8 @@ if [ $? -ne 0 ]; then
 fi
 
 python /var/www/app/KafkaMain.py &
+# This was not tested
+# python /var/www/app/webMain.py & 
 /usr/local/sbin/mosquitto -c /usr/local/src/mosquitto-1.4.13/mosquitto.conf &
 echo $! > /usr/local/src/mosquitto-1.4.13/mosquitto.pid
 /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf

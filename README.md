@@ -16,7 +16,7 @@ docker build -t mqtt-manager .
 ```
 
 If you'd like to run it by hand, mqtt-manager has the following dependencies
-(these packages are related to Ubuntu. Other Linux distributions might have a
+(these packages are related to Ubuntu. Other Linux distributions might have
 different names for them):
 
 - python-openssl, python-pip uwsgi-plugin-python,
