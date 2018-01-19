@@ -1,7 +1,7 @@
 How to build/update/translate documentation
 ===========================================
 
-If you have a local clone of MQTT Manager repository and you want to change the
+If you have a local clone of this repository and you want to change the
 documentation, then you should follow this simple guide.
 
 Build
@@ -47,7 +47,7 @@ To update the documentation, follow the steps below:
 
 .. code:: shell
 
-    > sphinx-intl -c conf.py update -p build/gettext -l pt_BR
+    sphinx-intl -c conf.py update -p build/gettext -l pt_BR
 
 4. Translate the messages in the pt\_BR language PO files
 

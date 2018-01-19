@@ -49,7 +49,7 @@ Components
 EJBCA-REST
 ~~~~~~~~~~
 
-EJBCA (https://www.ejbca.org) is a complete Private Key Infrastructure
+`EJBCA`_ is a complete Private Key Infrastructure
 (PKI) capable to manage CAs, cryptography keys and certificates. EJBCA
 provides a SOAP, web and a command line interface. EJBCA-REST is an
 wrapper on top of EJBCA that provides modern interfaces, like REST and
@@ -117,12 +117,11 @@ format.
 
 Note that the URL is 'routed' by the API gateway. As in other APIs in
 dojot, a JWT is needed. You can find how to generate and how to use such
-token in `User
-Guide <http://dojotdocs.readthedocs.io/en/latest/user_guide.html#first-steps>`__.
+token in `User Guide`_.
 
 In order to create the CSR file and ask for a certificate signature, a
 user can use a helper script called 'Certificate Retriever', which is
-detailed in `Certificate retriever <>`__ section.
+detailed in `Certificate retriever`_ section.
 
 MQTT Manager
 ~~~~~~~~~~~~
@@ -133,7 +132,7 @@ interfaces and Kakfa. Thus, HTTP requests or Kafka messages can be used
 to create and remove devices, as well as update CRL file (certification
 revogation list). This service is distributed as a docker container for
 easy deploy and its source code repository can be accessed in
-`MQTT-Manager GitHub project <https://github.com/dojot/mqtt-manager>`__.
+`MQTT Manager repository`_.
 
 Mosquitto by itself doesn't generate nor revoke certificates, it only
 rely upon a CA and implements TLS protocol. The 'creation' of a
@@ -172,8 +171,7 @@ signed by its trusty CA.
 
 Also note that MQTT-Manager is used only in case when a TLS-enabled
 broker is needed. If this is not the case, then the vanilla
-`ansi/mosquitto docker
-image <https://hub.docker.com/r/ansi/mosquitto>`__ can be used.
+`Mosquitto docker image`_ can be used.
 
 Mosquitto configuration files
 -----------------------------
@@ -218,8 +216,7 @@ Certificate retriever
 ---------------------
 
 This component is a helper script for device certificates creation. It
-is available at `Certificate Retriever GitHub
-repository <https://github.com/dojot/certificate-retriever>`__ and it
+is available at `Certificate Retriever GitHub repository`_ and it
 coded using Python 3.
 
 A user can use it by executing:
@@ -363,3 +360,9 @@ ACL entry in Mosquitto to allow it to publish data in the specified
 topic. Keep in mind that if a device publishes something in another
 topic (which it has no permission to publish) all data is discarded by
 Mosquitto with no warnings.
+
+.. _EJBCA: https://www.ejbca.org
+.. _User Guide: http://dojotdocs.readthedocs.io/en/latest/user_guide.html#first-steps
+.. _MQTT Manager repository: https://github.com/dojot/mqtt-manager
+.. _Mosquitto docker image: https://hub.docker.com/r/ansi/mosquitto
+.. _Certificate Retriever GitHub repository: https://github.com/dojot/certificate-retriever
