@@ -4,3 +4,5 @@
 *.csr
 *.pyc
 *.key
+.vscode
+docs/build/*

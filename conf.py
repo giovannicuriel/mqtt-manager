@@ -1,8 +1,6 @@
 # configuration file
 import os
 
-APIport = 9010
-
 EJBCA_API_URL = os.environ.get("MQTTREST_EJBCA_URL", "http://ejbca:5583")
 
 CAName = os.environ.get("MQTTREST_CA_NAME", "IOTmidCA")
