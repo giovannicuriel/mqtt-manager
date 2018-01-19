@@ -4,3 +4,4 @@
 *.csr
 *.pyc
 *.key
+.vscode
