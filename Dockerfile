@@ -29,5 +29,5 @@ RUN mkdir -p /var/log/nginx/app /var/log/uwsgi/app /var/log/supervisor  /var/www
 	chmod +x /usr/local/src/mosquitto-1.4.13/initialConf.py && \
 	ln /var/www/app/conf.py /usr/local/src/mosquitto-1.4.13/conf.py
 
-EXPOSE 8883 9010
+EXPOSE 8883
 CMD ["/usr/local/src/mosquitto-1.4.13/entrypoint.sh"]

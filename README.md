@@ -19,19 +19,17 @@ If you'd like to run it by hand, mqtt-manager has the following dependencies
 (these packages are related to Ubuntu. Other Linux distributions might have
 different names for them):
 
-- python-openssl, python-pip uwsgi-plugin-python,
-- nginx
-- supervisor
+- python-openssl
+- python-pip
 
 And there are a few other dependencies from pip:
 
-- uwsgi
 - flask
 - requests
 - kafka
 
-There are a few things that must be moved around in order to supervisor, flask
-and nginx properly find them. You can check the [dockerfile](https://github.com/dojot/mqtt-manager/blob/master/Dockerfile) to
+There are a few things that must be moved around in order to flask
+properly find them. You can check the [dockerfile](https://github.com/dojot/mqtt-manager/blob/master/Dockerfile) to
 find out what they are and where do they should go.
 
 ## How to run

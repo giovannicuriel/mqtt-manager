@@ -19,7 +19,7 @@ For a device to connect using TLS with Mosquitto, it must possess:
    to publish on a specific topic;
 -  (optional) A Certificate Revocation List (CRL).
 
-When a device is created, DeviceManager will automatically configure
+When a device is created, DeviceManager will automatically notify
 the following components:
 
 -  IoTAgent: will register the new device on its internal cache.
