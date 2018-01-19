@@ -5,3 +5,4 @@
 *.pyc
 *.key
 .vscode
+docs/build/*
